@@ -2,22 +2,21 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.MoveDirection;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OptionsParser {
 
-    public static MoveDirection[] metoda(String[] args) {
-        MoveDirection[] directions;
-        int n = args.length;
-        directions = new MoveDirection[n];
-        int k = 0;
+    public static List<MoveDirection> metoda(String[] args) {
+        List<MoveDirection> directions = new ArrayList<MoveDirection>();
         for (String arg : args) {
             switch (arg) {
-                case "f" -> directions[k] = MoveDirection.FORWARD;
-                case "b" -> directions[k] = MoveDirection.BACKWARD;
-                case "r" -> directions[k] = MoveDirection.RIGHT;
-                case "l" -> directions[k] = MoveDirection.LEFT;
-                default -> k--; //rzyga jak daję coś innego?
+                case "f" -> directions.add(MoveDirection.FORWARD);
+                case "b" -> directions.add(MoveDirection.BACKWARD);
+                case "r" -> directions.add(MoveDirection.RIGHT);
+                case "l" -> directions.add(MoveDirection.LEFT);
+                //poostałe opcje ignoruje
             }
-            k++;
         }
         return directions;
     }
