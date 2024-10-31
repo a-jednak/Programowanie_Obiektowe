@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import java.util.Objects;
+
 public class Vector2d {
     private final int x;
     private final int y;
@@ -18,14 +20,14 @@ public class Vector2d {
     }
 
     public String toString() {
-        return "(" + x + ", " + y + ")";
+        return "(%d, %d)".formatted(x,y);
     }
 
-    boolean precedes(Vector2d other) {
+    public boolean precedes(Vector2d other) {
         return other.getX() >= getX() && other.getY() >= getY();
     }
 
-    boolean follows(Vector2d other) {
+    public boolean follows(Vector2d other) {
         return other.getX() <= getX() && other.getY() <= getY();
     }
 
@@ -33,32 +35,38 @@ public class Vector2d {
         return new Vector2d(x + other.getX(), y + other.getY());
     }
 
-    Vector2d subtract(Vector2d other) {
+    public Vector2d subtract(Vector2d other) {
         return new Vector2d(x - other.getX(), y - other.getY());
     }
 
-    Vector2d upperRight(Vector2d other) {
+    public Vector2d upperRight(Vector2d other) {
         int y = Math.max(other.getY(), getY());
         int x = Math.max(other.getX(), getX());
         return new Vector2d(x, y);
     }
 
-    Vector2d lowerLeft(Vector2d other) {
+    public Vector2d lowerLeft(Vector2d other) {
         int y = Math.min(other.getY(), getY());
         int x = Math.min(other.getX(), getX());
         return new Vector2d(x, y);
     }
 
-    Vector2d opposite() {
+    public Vector2d opposite() {
         int x = getX();
         int y = getY();
         return new Vector2d(-x, -y);
     }
 
-    public boolean equals(Object other) {
-        if(other instanceof Vector2d) {
-            return ((Vector2d) other).getX() == getX() && ((Vector2d) other).getY() == getY();
-        }
-        return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vector2d vector2d = (Vector2d) o;
+        return x == vector2d.x && y == vector2d.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

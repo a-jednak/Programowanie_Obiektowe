@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static agh.ics.oop.OptionsParser.metoda;
+import static agh.ics.oop.OptionsParser.moves;
 import static org.junit.jupiter.api.Assertions.*;
 
 class OptionsParserTest {
 
     @Test
-    void metodaTest(){
+    void movesTest(){
         //given
         String[] directions = {"f", "r", "X", "l", "X", "b"};
 
@@ -23,10 +23,10 @@ class OptionsParserTest {
         correct.add(MoveDirection.BACKWARD);
 
         //when
-        List<MoveDirection> moves = metoda(directions);
+        List<MoveDirection> goodDirections = moves(directions);
 
         //then
-        assertEquals(correct, moves);
+        assertEquals(correct, goodDirections);
     }
 
 }

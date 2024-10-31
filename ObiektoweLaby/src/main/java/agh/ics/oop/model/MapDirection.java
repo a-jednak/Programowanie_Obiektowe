@@ -7,75 +7,40 @@ public enum MapDirection {
     WEST;
 
     public String toString() {
-        switch(this){
-            case NORTH -> {
-                return "Polnoc";
-            }
-            case EAST -> {
-                return "Wschod";
-            }
-            case SOUTH -> {
-                return "Poludnie";
-            }
-            case WEST -> {
-                return "Zachod";
-            }
-        }
-        return "Bledne dane";
+        return switch(this){
+            case NORTH -> "Polnoc";
+            case EAST -> "Wschod";
+            case SOUTH -> "Poludnie";
+            case WEST -> "Zachod";
+        };
+
     }
 
     public MapDirection next(){
-        switch(this){
-            case NORTH -> {
-                return MapDirection.EAST;
-            }
-            case EAST -> {
-                return MapDirection.SOUTH;
-            }
-            case SOUTH -> {
-                return MapDirection.WEST;
-            }
-            case WEST -> {
-                return MapDirection.NORTH;
-            }
-        }
-        return null;
+        return switch(this){
+            case NORTH -> MapDirection.EAST;
+            case EAST -> MapDirection.SOUTH;
+            case SOUTH -> MapDirection.WEST;
+            case WEST -> MapDirection.NORTH;
+        };
     }
 
     public MapDirection previous(){
-        switch(this){
-            case NORTH -> {
-                return MapDirection.WEST;
-            }
-            case EAST -> {
-                return MapDirection.NORTH;
-            }
-            case SOUTH -> {
-                return MapDirection.EAST;
-            }
-            case WEST -> {
-                return MapDirection.SOUTH;
-            }
-        }
-        return null;
+        return switch(this){
+            case NORTH -> MapDirection.WEST;
+            case EAST -> MapDirection.NORTH;
+            case SOUTH -> MapDirection.EAST;
+            case WEST -> MapDirection.SOUTH;
+        };
     }
 
     public Vector2d toUnitVector(){
-        switch(this){
-            case NORTH -> {
-                return new Vector2d(0,1);
-            }
-            case EAST -> {
-                return new Vector2d(1,0);
-            }
-            case SOUTH -> {
-                return new Vector2d(0,-1);
-            }
-            case WEST -> {
-                return new Vector2d(-1,0);
-            }
-        }
-        return null;
+        return switch(this){
+            case NORTH -> new Vector2d(0,1);
+            case EAST -> new Vector2d(1,0);
+            case SOUTH -> new Vector2d(0,-1);
+            case WEST -> new Vector2d(-1,0);
+        };
     }
 }
 

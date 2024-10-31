@@ -7,7 +7,7 @@ import java.util.List;
 
 public class OptionsParser {
 
-    public static List<MoveDirection> metoda(String[] args) {
+    public static List<MoveDirection> moves(String[] args) {
         List<MoveDirection> directions = new ArrayList<MoveDirection>();
         for (String arg : args) {
             directions.add(switch (arg) {
