@@ -3,7 +3,6 @@ package agh.ics.oop;
 import agh.ics.oop.model.MoveDirection;
 
 import java.util.List;
-import java.util.Objects;
 
 public class World {
 
@@ -11,7 +10,7 @@ public class World {
 
         System.out.println("System wystartowal");
 
-        run(OptionsParser.metoda(args));
+        run(OptionsParser.moves(args));
 
         System.out.println("System zakonczyl dzialanie");
     }
