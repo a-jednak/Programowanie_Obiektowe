@@ -9,19 +9,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Simulation<T,P> {
+public class Simulation {
 
-    private final List<T> animals;
+    private final List<Animal> animals;
     private final List<MoveDirection> directions;
-    private final WorldMap<T,P> map;
+    private final WorldMap map;
 
-    public Simulation(List<T> startingPoints, List<MoveDirection> directions, WorldMap<T,P> map) {
+    public Simulation(List<Vector2d> startingPoints, List<MoveDirection> directions, WorldMap map) {
         this.directions = directions;
-        this.animals = startingPoints;
+        this.animals = new ArrayList<>();
+        for (Vector2d position : startingPoints) {
+            Animal animal = new Animal(position);
+            if(map.place(animal)) {
+                this.animals.add(animal);
+            }
+        }
         this.map = map;
     }
 
-    public List<T> getAnimals() {
+    public List<Animal> getAnimals() {
         return Collections.unmodifiableList(animals);
     }
 

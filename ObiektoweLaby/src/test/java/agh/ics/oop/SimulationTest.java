@@ -28,7 +28,7 @@ class SimulationTest {
 
         //then
         assertEquals(MapDirection.NORTH, animal.getCurrentDirection());
-        assertEquals(new Vector2d(1,1), animal.getLocation());
+        assertEquals(new Vector2d(1,1), animal.getPosition());
     }
 
     @Test
@@ -51,10 +51,10 @@ class SimulationTest {
 
         //then
         assertEquals(MapDirection.NORTH, animal1.getCurrentDirection());
-        assertEquals(new Vector2d(1,0), animal1.getLocation());
+        assertEquals(new Vector2d(1,0), animal1.getPosition());
 
         assertEquals(MapDirection.EAST, animal2.getCurrentDirection());
-        assertEquals(new Vector2d(0,1), animal2.getLocation());
+        assertEquals(new Vector2d(0,1), animal2.getPosition());
     }
 
     @Test
@@ -74,6 +74,6 @@ class SimulationTest {
 
         //then
         assertEquals(MapDirection.EAST, animal.getCurrentDirection());
-        assertEquals(new Vector2d(0,2), animal.getLocation());
+        assertEquals(new Vector2d(0,2), animal.getPosition());
     }
 }

@@ -35,8 +35,8 @@ class RectangularMapTest {
         map.move(animal2, MoveDirection.FORWARD);
 
         //then
-        assertEquals(new Vector2d(2,2), animal1.getLocation());
-        assertEquals(new Vector2d(3,3), animal2.getLocation());
+        assertEquals(new Vector2d(2,2), animal1.getPosition());
+        assertEquals(new Vector2d(3,3), animal2.getPosition());
     }
 
     @Test
