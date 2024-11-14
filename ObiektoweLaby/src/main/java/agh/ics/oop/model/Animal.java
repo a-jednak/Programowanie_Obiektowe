@@ -2,6 +2,9 @@ package agh.ics.oop.model;
 
 public class Animal {
 
+    public static final Vector2d MIN_BOUNDARY = new Vector2d(0,0);
+    public static final Vector2d MAX_BOUNDARY = new Vector2d(4,4);
+
     private MapDirection currentDirection;
     private Vector2d location;
 
@@ -23,38 +26,31 @@ public class Animal {
     }
 
     public String toString() {
-        return "(%d, %d), %s".formatted(location.getX(), location.getY(), currentDirection);
+        return "%s".formatted(currentDirection);
     }
 
     public boolean isAt(Vector2d position) {
         return location.equals(position);
     }
 
-    public void move(MoveDirection direction) {
+    public void move(MoveDirection direction, RectangularMap map) {
         switch (direction) {
             case RIGHT -> currentDirection = currentDirection.next();
             case LEFT -> currentDirection = currentDirection.previous();
-            case FORWARD, BACKWARD -> actualMove(direction);
+            case FORWARD, BACKWARD -> actualMove(direction, map);
         }
     }
 
-    private void actualMove(MoveDirection direction) {
-        Vector2d v = currentDirection.toUnitVector();
+    private void actualMove(MoveDirection direction, RectangularMap map) {
+        Vector2d v;
         if (direction.equals(MoveDirection.FORWARD)) {
-            location = location.add(v);
-            if(outOfBounds(location)) {
-                location = location.subtract(v);
-            }
+            v = location.add(currentDirection.toUnitVector());
         }
         else {
-            location = location.subtract(v);
-            if(outOfBounds(location)) {
-                location = location.add(v);
-            }
+            v = location.subtract(currentDirection.toUnitVector());
         }
-    }
-
-    private boolean outOfBounds(Vector2d position) {
-        return position.getX() > 4 || position.getX() < 0 || position.getY() > 4 || position.getY() < 0;
+        if(map.canMoveTo(v)) {
+            location = v;
+        }
     }
 }
