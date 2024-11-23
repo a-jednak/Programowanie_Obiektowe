@@ -18,7 +18,6 @@ public class OptionsParser {
                         default -> throw new IllegalArgumentException(arg + " is not a legal move specification");
                     }
             );
-            directions.remove(null);
         }
         return directions;
     }
