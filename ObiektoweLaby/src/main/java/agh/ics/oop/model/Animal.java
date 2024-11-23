@@ -1,6 +1,6 @@
 package agh.ics.oop.model;
 
-public class Animal {
+public class Animal implements WorldElement {
 
     public static final Vector2d MIN_BOUNDARY = new Vector2d(0,0);
     public static final Vector2d MAX_BOUNDARY = new Vector2d(4,4);
@@ -21,7 +21,8 @@ public class Animal {
         return currentDirection;
     }
 
-    public Vector2d getLocation() {
+    @Override
+    public Vector2d getPosition() {
         return location;
     }
 
@@ -33,7 +34,7 @@ public class Animal {
         return location.equals(position);
     }
 
-    public void move(MoveDirection direction, RectangularMap map) {
+    void move(MoveDirection direction, MoveValidator map) {
         switch (direction) {
             case RIGHT -> currentDirection = currentDirection.next();
             case LEFT -> currentDirection = currentDirection.previous();
@@ -41,7 +42,7 @@ public class Animal {
         }
     }
 
-    private void actualMove(MoveDirection direction, RectangularMap map) {
+    private void actualMove(MoveDirection direction, MoveValidator map) {
         Vector2d v;
         if (direction.equals(MoveDirection.FORWARD)) {
             v = location.add(currentDirection.toUnitVector());
@@ -53,4 +54,5 @@ public class Animal {
             location = v;
         }
     }
+
 }
