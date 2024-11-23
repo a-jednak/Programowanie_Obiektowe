@@ -15,8 +15,6 @@ public class GrassField extends AbstractWorldMap {
         RandomPositionGenerator generator = new RandomPositionGenerator(limit,limit,grassSpots);
         for( Vector2d pos : generator) {
             this.grass.put(pos, new Grass(pos));
-            this.upperRight = pos;
-            this.lowerLeft = pos;
         }
     }
 
@@ -26,38 +24,29 @@ public class GrassField extends AbstractWorldMap {
 
     @Override
     public WorldElement objectAt(Vector2d position) {
-        if(super.objectAt(position) != null){
-            return super.objectAt(position);
+        WorldElement object = super.objectAt(position);
+        if(object != null){
+            return object;
         }
         return grass.get(position);
     }
 
-    private void corners() {
-        for(Vector2d position : animals.keySet()) {
-            this.lowerLeft = position.lowerLeft(lowerLeft);
-            this.upperRight = position.upperRight(upperRight);
-        }
-        for(Vector2d position : grass.keySet())
-        {
-            this.lowerLeft = position.lowerLeft(lowerLeft);
-            this.upperRight = position.upperRight(upperRight);
-        }
-    }
 
     @Override
-    public String toString() {
-        corners();
-        return super.toString();
-    }
-
-    @Override
-    public Map<Vector2d, WorldElement> getElements() {
-        Map<Vector2d, WorldElement> elements = super.getElements();
-        for(Map.Entry<Vector2d, Grass> entry : grass.entrySet()) {
-            Vector2d position = entry.getKey();
-            Grass grass = entry.getValue();
-            elements.put(position, grass);
-        }
+    public List<WorldElement> getElements() {
+        List<WorldElement> elements = super.getElements();
+        elements.addAll(grass.values());
         return elements;
+    }
+
+    @Override
+    public Boundary getCurrentBounds() {
+        Vector2d lowerBound = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        Vector2d upperBound = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
+        for(WorldElement element : getElements()) {
+            lowerBound = lowerBound.lowerLeft(element.getPosition());
+            upperBound = upperBound.upperRight(element.getPosition());
+        }
+        return new Boundary(lowerBound, upperBound);
     }
 }

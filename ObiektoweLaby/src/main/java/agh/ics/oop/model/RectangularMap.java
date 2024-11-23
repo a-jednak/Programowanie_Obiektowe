@@ -7,15 +7,22 @@ import java.util.Map;
 
 public class RectangularMap extends AbstractWorldMap {
 
+    private final Boundary bounds;
+
     public RectangularMap(int width, int height) {
-        this.upperRight = new Vector2d(width-1,height-1);
-        this.lowerLeft = new Vector2d(0, 0);
+        Vector2d upperRight = new Vector2d(width-1,height-1);
+        Vector2d lowerLeft = new Vector2d(0, 0);
+        this.bounds = new Boundary(upperRight, lowerLeft);
     }
 
     @Override
     public boolean canMoveTo(Vector2d position) {
-        return position.follows(lowerLeft) && position.precedes(upperRight) && super.canMoveTo(position);
+        return position.follows(bounds.lowerLeft()) && position.precedes(bounds.upperRight()) && super.canMoveTo(position);
     }
 
+    @Override
+    public Boundary getCurrentBounds() {
+        return bounds;
+    }
 
 }

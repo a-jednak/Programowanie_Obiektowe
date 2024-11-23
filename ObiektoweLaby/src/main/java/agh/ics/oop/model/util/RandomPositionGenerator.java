@@ -10,7 +10,7 @@ import java.util.List;
 public class RandomPositionGenerator implements Iterable<Vector2d> {
 
     private final List<Vector2d> positions = new ArrayList<Vector2d>();
-    int size;
+    private final int size;
 
     public RandomPositionGenerator(double maxX, double maxY, int size) {
         for (int i = 0; i <= maxX; i++) {
@@ -34,11 +34,11 @@ public class RandomPositionGenerator implements Iterable<Vector2d> {
 class RandomPositionGeneratorIterator implements Iterator<Vector2d> {
     private final int size;
     private int index = 0;
-    RandomPositionGenerator RPG;
+    RandomPositionGenerator rpg;
 
-    RandomPositionGeneratorIterator(int size, RandomPositionGenerator RPG) {
+    RandomPositionGeneratorIterator(int size, RandomPositionGenerator rpg) {
         this.size = size;
-        this.RPG = RPG;
+        this.rpg = rpg;
     }
 
     @Override
@@ -49,9 +49,9 @@ class RandomPositionGeneratorIterator implements Iterator<Vector2d> {
     @Override
     public Vector2d next() {
         index++;
-        Collections.shuffle(RPG.getPositions());
-        Vector2d res = RPG.getPositions().getLast();
-        RPG.getPositions().remove(res);
+        Collections.shuffle(rpg.getPositions());
+        Vector2d res = rpg.getPositions().getLast();
+        rpg.getPositions().remove(res);
         return res;
     }
 }
