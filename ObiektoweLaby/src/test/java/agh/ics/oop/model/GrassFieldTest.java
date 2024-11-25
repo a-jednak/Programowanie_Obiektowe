@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.IncorrectPositionException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -17,9 +18,14 @@ class GrassFieldTest {
         Animal animal3 = new Animal();
 
         //then
-        assertTrue(field.place(animal1));
-        assertTrue(field.place(animal2));
-        assertFalse(field.place(animal3));
+        try {
+            assertTrue(field.place(animal1));
+            assertTrue(field.place(animal2));
+            assertFalse(field.place(animal3));
+            fail("Expected IncorrectPositionException was not thrown");
+        } catch (IncorrectPositionException e) {
+            assertEquals("Position (2, 2) is not correct",e.getMessage());
+        }
     }
 
     @Test
@@ -29,7 +35,12 @@ class GrassFieldTest {
         Animal animal1 = new Animal();
 
         //when
-        field.place(animal1);
+        try {
+            field.place(animal1);
+        }
+        catch (IncorrectPositionException e) {
+            fail(e.getMessage());
+        }
         field.move(animal1, MoveDirection.BACKWARD);
         field.move(animal1, MoveDirection.BACKWARD);
         field.move(animal1, MoveDirection.BACKWARD);
@@ -48,8 +59,13 @@ class GrassFieldTest {
         Animal animal2 = new Animal(new Vector2d(4,4));
 
         //when
-        field.place(animal1);
-        field.place(animal2);
+        try {
+            field.place(animal1);
+            field.place(animal2);
+        }
+        catch (IncorrectPositionException e) {
+            fail(e.getMessage());
+        }
         Map<Vector2d, Grass> grass = field.getGrass();
 
         //then
@@ -67,7 +83,12 @@ class GrassFieldTest {
         Animal animal1 = new Animal();
 
         //when
-        field.place(animal1);
+        try {
+            field.place(animal1);
+        }
+        catch (IncorrectPositionException e) {
+            fail(e.getMessage());
+        }
         Map<Vector2d, Grass> grass = field.getGrass();
 
         //then

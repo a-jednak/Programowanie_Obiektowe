@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.IncorrectPositionException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,9 +16,15 @@ class RectangularMapTest {
         Animal animal3 = new Animal();
 
         //then
-        assertTrue(map.place(animal1));
-        assertFalse(map.place(animal2));
-        assertFalse(map.place(animal3));
+        try {
+            assertTrue(map.place(animal1));
+            assertFalse(map.place(animal2));
+            assertFalse(map.place(animal3));
+            fail("Expected IncorrectPositionException was not thrown");
+        }
+        catch (IncorrectPositionException e) {
+            assertEquals("Position (5, 2) is not correct",e.getMessage());
+        }
     }
 
     @Test
@@ -28,8 +35,13 @@ class RectangularMapTest {
         Animal animal2 = new Animal(new Vector2d(2,3));
 
         //when
-        map.place(animal1);
-        map.place(animal2);
+        try {
+            map.place(animal1);
+            map.place(animal2);
+        }
+        catch (IncorrectPositionException e) {
+            fail(e.getMessage());
+        }
         map.move(animal1, MoveDirection.FORWARD);
         map.move(animal2, MoveDirection.RIGHT);
         map.move(animal2, MoveDirection.FORWARD);
@@ -47,8 +59,14 @@ class RectangularMapTest {
         Animal animal2 = new Animal(new Vector2d(1,7));
 
         //when
-        map.place(animal1);
-        map.place(animal2);
+        try {
+            map.place(animal1);
+            map.place(animal2);
+            fail("Expected IncorrectPositionException was not thrown");
+        }
+        catch (IncorrectPositionException e) {
+            assertEquals("Position (1, 7) is not correct",e.getMessage());
+        }
 
         //then
         assertFalse(map.isOccupied(new Vector2d(1,7)));
@@ -63,8 +81,13 @@ class RectangularMapTest {
         Animal animal2 = new Animal();
 
         //when
-        map.place(animal1);
-        map.place(animal2);
+        try {
+            map.place(animal1);
+            map.place(animal2);
+        }
+        catch (IncorrectPositionException e) {
+            fail(e.getMessage());
+        }
 
         //then
         assertEquals(animal1, map.objectAt(new Vector2d(3,5)));
@@ -78,7 +101,12 @@ class RectangularMapTest {
         Animal animal = new Animal();
 
         //when
-        map.place(animal);
+        try {
+            map.place(animal);
+        }
+        catch (IncorrectPositionException e) {
+            fail(e.getMessage());
+        }
 
         //then
         assertFalse(map.canMoveTo(new Vector2d(2,2)));
