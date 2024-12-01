@@ -16,6 +16,7 @@ public class GrassField extends AbstractWorldMap {
         for( Vector2d pos : generator) {
             this.grass.put(pos, new Grass(pos));
         }
+        assignID();
     }
 
     public Map<Vector2d, Grass> getGrass() {

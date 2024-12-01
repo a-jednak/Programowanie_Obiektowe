@@ -12,7 +12,8 @@ public class RectangularMap extends AbstractWorldMap {
     public RectangularMap(int width, int height) {
         Vector2d upperRight = new Vector2d(width-1,height-1);
         Vector2d lowerLeft = new Vector2d(0, 0);
-        this.bounds = new Boundary(upperRight, lowerLeft);
+        this.bounds = new Boundary(lowerLeft, upperRight);
+        assignID();
     }
 
     @Override
