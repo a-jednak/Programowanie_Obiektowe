@@ -7,6 +7,7 @@ import agh.ics.oop.model.util.IncorrectPositionException;
 import java.awt.*;
 import java.util.Map;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * The interface responsible for interacting with the map of the world.
@@ -51,4 +52,6 @@ public interface WorldMap extends MoveValidator {
     List<WorldElement> getElements();
 
     Boundary getCurrentBounds();
+
+    UUID getID();
 }

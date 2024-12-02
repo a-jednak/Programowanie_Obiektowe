@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Simulation {
+public class Simulation implements Runnable{
 
     private final List<Animal> animals;
     private final List<MoveDirection> directions;
@@ -37,6 +37,7 @@ public class Simulation {
         return Collections.unmodifiableList(animals);
     }
 
+    @Override
     public void run() {
         System.out.println(map);
         int animalCnt = animals.size();
