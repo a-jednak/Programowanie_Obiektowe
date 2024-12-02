@@ -26,14 +26,13 @@ public class SimulationEngine {
 
     public void runAsync() throws InterruptedException {
         for(Simulation simulation : simulations){
-            Thread thread = new Thread(simulation);
+            Thread thread = new Thread(simulation); //(simulation::run) -> Simulation nie musi miec 'implements runnable'
             threads.add(thread);
             thread.start();
         }
-        awaitSimulationsEnd();
     }
 
-    private void awaitSimulationsEnd() throws InterruptedException {
+    public void awaitSimulationsEnd() throws InterruptedException {
         for(Thread thread : threads){
             thread.join();
         }
@@ -47,6 +46,5 @@ public class SimulationEngine {
         for(Simulation simulation : simulations){
             threadPool.submit(simulation);
         }
-        awaitSimulationsEnd();
     }
 }

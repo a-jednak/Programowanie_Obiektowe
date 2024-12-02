@@ -3,23 +3,15 @@ package agh.ics.oop.model;
 import agh.ics.oop.model.util.IncorrectPositionException;
 import agh.ics.oop.model.util.MapVisualizer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class AbstractWorldMap implements WorldMap {
 
     protected final Map<Vector2d, Animal> animals = new HashMap<>();
     protected final MapVisualizer visualizer = new MapVisualizer(this);
     protected final List<MapChangeListener> observers = new ArrayList<>();
-    protected int mapID;
-    protected static int ids = 0;
+    protected final UUID mapID = UUID.randomUUID();
 
-    protected void assignID(){
-        this.mapID = ids;
-        ids++;
-    }
 
     @Override
     public boolean place(Animal animal) throws IncorrectPositionException {
@@ -83,7 +75,7 @@ public abstract class AbstractWorldMap implements WorldMap {
     }
 
     @Override
-    public int getID(){
+    public UUID getID(){
         return mapID;
     }
 

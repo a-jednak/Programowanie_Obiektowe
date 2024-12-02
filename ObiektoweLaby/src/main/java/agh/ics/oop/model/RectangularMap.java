@@ -9,11 +9,11 @@ public class RectangularMap extends AbstractWorldMap {
 
     private final Boundary bounds;
 
-    public RectangularMap(int width, int height) {
+    public RectangularMap(int id, int width, int height) {
         Vector2d upperRight = new Vector2d(width-1,height-1);
         Vector2d lowerLeft = new Vector2d(0, 0);
         this.bounds = new Boundary(lowerLeft, upperRight);
-        assignID();
+//        assignID();
     }
 
     @Override

@@ -14,11 +14,12 @@ public class World {
         List<MoveDirection> directions = OptionsParser.parse(moves);
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(4,3));
         List<Simulation> simulations = new ArrayList<>();
+        ConsoleMapDisplay consoleMapDisplay = new ConsoleMapDisplay();
 
         for(int i =0; i<1000; i++) {
             int x = (int)(Math.random()*10);
-            GrassField map = new GrassField(x);
-            map.addObserver(new ConsoleMapDisplay());
+            GrassField map = new GrassField(i, x);
+            map.addObserver(consoleMapDisplay);
             Simulation simulation = new Simulation(positions, directions, map);
             simulations.add(simulation);
         }
@@ -26,6 +27,7 @@ public class World {
 //        engine.runSync();
 //        engine.runAsync();
         engine.runAsyncInThreadPool();
+        engine.awaitSimulationsEnd();
 
         System.out.println("System zakonczyl dzialanie");
 
