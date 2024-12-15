@@ -18,7 +18,7 @@ public class World {
 
         for(int i =0; i<1000; i++) {
             int x = (int)(Math.random()*10);
-            GrassField map = new GrassField(i, x);
+            GrassField map = new GrassField(x);
             map.addObserver(consoleMapDisplay);
             Simulation simulation = new Simulation(positions, directions, map);
             simulations.add(simulation);

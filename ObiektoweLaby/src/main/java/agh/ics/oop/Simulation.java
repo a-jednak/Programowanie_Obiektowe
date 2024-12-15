@@ -16,7 +16,7 @@ public class Simulation implements Runnable{
     private final List<MoveDirection> directions;
     private final WorldMap map;
 
-    public Simulation(List<Vector2d> startingPoints, List<MoveDirection> directions, WorldMap map) {
+    public Simulation(List<Vector2d> startingPoints, List<MoveDirection> directions, WorldMap map) throws InterruptedException {
         this.directions = directions;
         this.animals = new ArrayList<>();
         for (Vector2d position : startingPoints) {
@@ -43,6 +43,11 @@ public class Simulation implements Runnable{
         int animalCnt = animals.size();
         for (int i = 0; i < directions.size(); i++) {
             map.move(animals.get(i%animalCnt), directions.get(i));
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
