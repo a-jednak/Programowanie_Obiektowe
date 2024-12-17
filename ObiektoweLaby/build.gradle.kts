@@ -1,6 +1,7 @@
 plugins {
     id("java")
     id("application")
+    id("org.openjfx.javafxplugin") version "0.0.13"
 }
 
 group = "org.example"
@@ -23,6 +24,11 @@ java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(23))
     }
+}
+
+javafx {
+    version = "17"
+    modules = listOf("javafx.base", "javafx.controls", "javafx.fxml", "javafx.graphics", "javafx.media", "javafx.swing", "javafx.web")
 }
 
 tasks.test {
