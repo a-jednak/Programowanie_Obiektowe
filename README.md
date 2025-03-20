@@ -1,5 +1,5 @@
-# PO_2024_PN1830_JEDYNAK
-# Zuzanna Jedynak
-# Grupa 1 18:30
-# Chunky [he's dead]
-# https://gitexercises.fracz.com/committer/e314421cae9a71ffdee9039e479029cb46676595?email=1alekow1@gmail.com
+# Programowanie Obiektowe 2024/2025
+Repozytorium poświęcone rozwiązaniom laboratoriów z zajęć Programowania Obiektowego prowadzonych na kierunku Informatyka AGH.
+Rozwój projektu można przejrzeć na osobnych branchach.
+
+Treści zadań znajdują się [tutaj](https://github.com/Soamid/obiektowe-lab)
